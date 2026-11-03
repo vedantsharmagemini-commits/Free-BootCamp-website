@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+
+<title>Admin Panel | Bootcamp Registration</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080808;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5d76e;
+  --dark: #080808;
+  --card: #151515;
+  --border: #333333;
+  --muted: #aaaaaa;
+  --danger: #e74c3c;
+  --success: #27ae60;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.gold {
+  color: var(--gold);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  background: #101010;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: white;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--gold);
+}
+
+label {
+  font-size: 14px;
+  color: #dddddd;
+}
+
+.primary-btn {
+  background: linear-gradient(
+    135deg,
+    var(--gold),
+    var(--gold-light)
+  );
+  color: #111111;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.secondary-btn {
+  background: #252525;
+  color: white;
+  border: 1px solid var(--border);
+  padding: 11px 16px;
+  border-radius: 7px;
+}
+
+.danger-btn {
+  background: #7f1d1d;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+}
+
+.message {
+  font-size: 13px;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 18px 20px;
+  background: #111111;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h2 {
+  color: var(--gold);
+  font-size: 21px;
+}
+
+@media(max-width:600px) {
+  .container {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h2>BOOTCAMP <span class="gold">ADMIN</span></h2>
+  <span style="color:#999;font-size:12px;">
+    REGISTRATION MANAGEMENT SYSTEM
+  </span>
+</div>
+
+<div class="container">
+
+<!-- PART 2 WILL CONTINUE HERE -->
+  <!-- =================================
+     PART 2: ADMIN LOGIN
+================================= -->
+
+<section id="loginSection" style="
+  max-width:420px;
+  margin:55px auto;
+">
+
+  <div class="card">
+
+    <div style="text-align:center;margin-bottom:25px;">
+
+      <div style="
+        font-size:35px;
+        color:var(--gold);
+        margin-bottom:10px;
+      ">◆</div>
+
+      <h2 class="section-title" style="margin-bottom:8px;">
+        ADMIN LOGIN
+      </h2>
+
+      <p style="color:var(--muted);font-size:13px;">
+        Login to access your registration dashboard
+      </p>
+
+    </div>
+
+    <form id="loginForm">
+
+      <label for="loginUsername">
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="loginUsername"
+        placeholder="Enter username"
+        autocomplete="username"
+        required
+      >
+
+      <label for="loginPassword">
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button
+        type="submit"
+        id="loginBtn"
+        class="primary-btn"
+        style="width:100%;margin-top:8px;"
+      >
+        LOGIN TO DASHBOARD
+      </button>
+
+      <div
+        id="loginMessage"
+        class="message"
+        role="status"
+      ></div>
+
+    </form>
+
+  </div>
+
+  <p style="
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    margin-top:20px;
+  ">
+    Secure Admin Access
+  </p>
+
+</section>
+  <!-- =================================
+     PART 3: DASHBOARD + REGISTRATIONS
+================================= -->
+
+<section id="dashboardSection" class="hidden">
+
+  <!-- DASHBOARD HEADER -->
+
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:25px 0;
+  ">
+
+    <div>
+      <h2 class="section-title" style="margin-bottom:5px;">
+        Dashboard
+      </h2>
+
+      <p style="color:var(--muted);font-size:13px;">
+        Welcome, <span id="userInfo" class="gold"></span>
+      </p>
+    </div>
+
+    <button
+      type="button"
+      id="logoutBtn"
+      class="danger-btn"
+    >
+      Logout
+    </button>
+
+  </div>
+
+
+  <!-- STATISTICS -->
+
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+  ">
+
+    <div class="card">
+      <p style="color:var(--muted);font-size:13px;">
+        Total Registrations
+      </p>
+
+      <h2
+        id="totalCount"
+        class="gold"
+        style="font-size:30px;margin-top:10px;"
+      >0</h2>
+    </div>
+
+    <div class="card">
+      <p style="color:var(--muted);font-size:13px;">
+        Selected Date Registrations
+      </p>
+
+      <h2
+        id="dateCount"
+        class="gold"
+        style="font-size:30px;margin-top:10px;"
+      >0</h2>
+    </div>
+
+  </div>
+
+
+  <!-- TEAM STATISTICS -->
+
+  <div class="card" style="margin-bottom:25px;">
+
+    <h3 class="section-title">
+      Team Statistics
+    </h3>
+
+    <div
+      id="teamStats"
+      style="
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+      "
+    ></div>
+
+  </div>
+
+
+  <!-- REGISTRATION MANAGEMENT -->
+
+  <div class="card">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:20px;
+    ">
+
+      <h3 class="section-title" style="margin:0;">
+        Registrations
+      </h3>
+
+      <div style="
+        display:flex;
+        flex-wrap:wrap;
+        gap:8px;
+      ">
+
+        <button
+          type="button"
+          id="refreshBtn"
+          class="secondary-btn"
+        >
+          Refresh
+        </button>
+
+        <button
+          type="button"
+          id="exportBtn"
+          class="primary-btn"
+        >
+          Export CSV
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:12px;
+    ">
+
+      <div>
+        <label for="dateSelect">
+          Select Registration Date
+        </label>
+
+        <select id="dateSelect">
+          <option value="">Loading dates...</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="searchInput">
+          Search Registration
+        </label>
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search name, phone, city..."
+        >
+      </div>
+
+    </div>
+
+
+    <div
+      id="dashboardMessage"
+      class="message"
+      role="status"
+    ></div>
+
+
+    <div
+      id="tableLoading"
+      style="
+        display:none;
+        text-align:center;
+        padding:20px;
+        color:var(--gold);
+      "
+    >
+      Loading registrations...
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div style="
+      overflow-x:auto;
+      width:100%;
+      margin-top:15px;
+    ">
+
+      <table style="
+        width:100%;
+        min-width:950px;
+        border-collapse:collapse;
+        font-size:13px;
+      ">
+
+        <thead>
+          <tr style="
+            background:#242424;
+            color:var(--gold);
+            text-align:left;
+          ">
+
+            <th style="padding:13px;">Name</th>
+            <th style="padding:13px;">Age</th>
+            <th style="padding:13px;">WhatsApp</th>
+            <th style="padding:13px;">City</th>
+            <th style="padding:13px;">Email</th>
+            <th style="padding:13px;">Currently Doing</th>
+            <th style="padding:13px;">Team</th>
+            <th style="padding:13px;">Mentor</th>
+            <th style="padding:13px;">Action</th>
+
+          </tr>
+        </thead>
+
+        <tbody id="registrationBody">
+
+          <tr>
+            <td
+              colspan="9"
+              style="
+                padding:25px;
+                text-align:center;
+                color:#888;
+              "
+            >
+              No registrations loaded.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+  <!-- =================================
+     PART 4: EDIT + ADMIN MANAGEMENT
+================================= -->
+
+<!-- EDIT REGISTRATION MODAL -->
+
+<div
+  id="editModal"
+  class="hidden"
+  style="
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:1000;
+    padding:20px;
+    overflow-y:auto;
+    align-items:center;
+    justify-content:center;
+  "
+>
+
+  <div class="card" style="width:100%;max-width:550px;margin:auto;">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    ">
+
+      <h3 class="section-title" style="margin:0;">
+        Edit Registration
+      </h3>
+
+      <button
+        type="button"
+        id="closeEditBtn"
+        class="secondary-btn"
+      >✕</button>
+
+    </div>
+
+    <form id="editForm">
+
+      <label for="editName">Full Name</label>
+      <input type="text" id="editName" required>
+
+      <label for="editAge">Age</label>
+      <input type="number" id="editAge" min="18" max="60" required>
+
+      <label for="editWhatsapp">WhatsApp Number</label>
+      <input type="tel" id="editWhatsapp" required>
+
+      <label for="editCity">City</label>
+      <input type="text" id="editCity" required>
+
+      <label for="editEmail">Email Address</label>
+      <input type="email" id="editEmail">
+
+      <label for="editDescription">Currently Doing</label>
+      <input type="text" id="editDescription">
+
+      <label for="editTeam">Team</label>
+      <select id="editTeam">
+        <option value="TEAM SHIVAM">TEAM SHIVAM</option>
+        <option value="TEAM JATIN">TEAM JATIN</option>
+        <option value="TEAM SAHIL">TEAM SAHIL</option>
+        <option value="TEAM KETAN">TEAM KETAN</option>
+        <option value="TEAM MEGHA">TEAM MEGHA</option>
+        <option value="TEAM ISHIKA">TEAM ISHIKA</option>
+      </select>
+
+      <label for="editMentor">Mentor Name</label>
+      <input type="text" id="editMentor">
+
+      <div
+        id="editMessage"
+        class="message"
+        role="status"
+      ></div>
+
+      <button
+        type="submit"
+        class="primary-btn"
+        style="width:100%;"
+      >
+        Save Changes
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN MANAGEMENT -->
+
+<section
+  id="adminManagement"
+  class="card"
+  style="margin-top:25px;"
+>
+
+  <h3 class="section-title">
+    Admin Management
+  </h3>
+
+  <form
+    id="createAdminForm"
+    style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:10px;
+      align-items:end;
+    "
+  >
+
+    <div>
+      <label for="newUsername">New Username</label>
+      <input
+        type="text"
+        id="newUsername"
+        placeholder="Enter username"
+        required
+      >
+    </div>
+
+    <div>
+      <label for="newPassword">Password</label>
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="Enter password"
+        required
+      >
+    </div>
+
+    <div>
+      <label for="newRole">Role</label>
+      <select id="newRole" required>
+        <option value="manager">Manager</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="primary-btn"
+      style="margin-bottom:15px;"
+    >
+      Create Admin
+    </button>
+
+  </form>
+
+  <div
+    id="adminMessage"
+    class="message"
+    role="status"
+  ></div>
+
+  <h4 style="margin:20px 0 12px;color:var(--gold);">
+    Existing Admin Users
+  </h4>
+
+  <div style="overflow-x:auto;">
+
+    <table style="
+      width:100%;
+      min-width:550px;
+      border-collapse:collapse;
+      font-size:13px;
+    ">
+
+      <thead>
+        <tr style="background:#242424;color:var(--gold);">
+          <th style="padding:12px;text-align:left;">Username</th>
+          <th style="padding:12px;text-align:left;">Role</th>
+          <th style="padding:12px;text-align:left;">Status</th>
+          <th style="padding:12px;text-align:left;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody id="adminUsersBody">
+        <tr>
+          <td colspan="4" style="padding:15px;text-align:center;">
+            Admin users will appear here.
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- PASSWORD RESET MODAL -->
+
+<div
+  id="passwordModal"
+  class="hidden"
+  style="
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:1100;
+    padding:20px;
+    align-items:center;
+    justify-content:center;
+  "
+>
+
+  <div class="card" style="width:100%;max-width:400px;margin:auto;">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    ">
+
+      <h3 class="section-title" style="margin:0;">
+        Reset Password
+      </h3>
+
+      <button
+        type="button"
+        id="closePasswordBtn"
+        class="secondary-btn"
+      >✕</button>
+
+    </div>
+
+    <p style="color:var(--muted);font-size:13px;margin-bottom:15px;">
+      Username:
+      <strong id="passwordUsername" class="gold"></strong>
+    </p>
+
+    <label for="resetPasswordInput">
+      New Password
+    </label>
+
+    <input
+      type="password"
+      id="resetPasswordInput"
+      placeholder="Enter new password"
+      minlength="6"
+      required
+    >
+
+    <div
+      id="passwordMessage"
+      class="message"
+      role="status"
+    ></div>
+
+    <button
+      type="button"
+      id="resetPasswordBtn"
+      class="primary-btn"
+      style="width:100%;"
+    >
+      Reset Password
+    </button>
+
+  </div>
+
+</div>
+  <!-- =================================
+     PART 5: JAVASCRIPT + API
+================================= -->
+
+<script>
+"use strict";
+
+const API_URL = "/.netlify/functions/api";
+
+let authToken = "";
+let currentAdmin = null;
+let selectedDate = "";
+let registrations = [];
+let editingRecord = null;
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+function getValue(obj, keys, fallback = "") {
+  for (const key of keys) {
+    if (obj && obj[key] !== undefined && obj[key] !== null) {
+      return obj[key];
+    }
+  }
+  return fallback;
+}
+
+function showMessage(id, message, type = "error") {
+  const el = $(id);
+  if (!el) return;
+
+  el.textContent = message;
+  el.style.color = type === "success" ? "#27ae60" : "#ef4444";
+}
+
+async function apiRequest(action, args = []) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ action, args })
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Server error.");
+  }
+
+  return result;
+}
+
+/* ---------- LOGIN ---------- */
+
+async function handleLogin(event) {
+  event.preventDefault();
+
+  const username = $("loginUsername").value.trim();
+  const password = $("loginPassword").value;
+  const button = $("loginBtn");
+
+  if (!username || !password) {
+    showMessage("loginMessage", "Enter username and password.");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "PLEASE WAIT...";
+  showMessage("loginMessage", "");
+
+  try {
+    const result = await apiRequest(
+      "adminLogin",
+      [username, password]
+    );
+
+    if (!result || result.success === false) {
+      throw new Error(result.message || "Login failed.");
+    }
+
+    const data = result.data || result;
+
+    authToken = getValue(data, ["token", "authToken"], "");
+
+    if (!authToken) {
+      throw new Error("Login token not received.");
+    }
+
+    currentAdmin = {
+      username: getValue(data, ["username"], username),
+      role: getValue(data, ["role"], "")
+    };
+
+    $("loginSection").classList.add("hidden");
+    $("dashboardSection").classList.remove("hidden");
+
+    $("userInfo").textContent =
+      currentAdmin.username + " (" + currentAdmin.role + ")";
+
+    // Admin management is visible only to admin roles.
+    const role = String(currentAdmin.role).toLowerCase();
+
+    if (role === "admin" || role === "superadmin" ||
+        role === "super_admin") {
+      $("adminManagement").style.display = "block";
+      await loadAdminUsers();
+    } else {
+      $("adminManagement").style.display = "none";
+    }
+
+    await loadDashboard();
+
+  } catch (error) {
+    showMessage("loginMessage", error.message);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "LOGIN TO DASHBOARD";
+  }
+}
+
+/* ---------- DASHBOARD ---------- */
+
+async function loadDashboard() {
+  if (!authToken) return;
+
+  showMessage("dashboardMessage", "Loading dashboard...", "success");
+  $("tableLoading").style.display = "block";
+
+  try {
+    const result = await apiRequest(
+      "getDashboardData",
+      [authToken, selectedDate]
+    );
+
+    if (!result || result.success === false) {
+      throw new Error(result.message || "Dashboard loading failed.");
+    }
+
+    const data = result.data || result;
+
+    const dates = getValue(
+      data,
+      ["dates", "dateTabs", "availableDates"],
+      []
+    );
+
+    registrations = getValue(
+      data,
+      ["registrations", "records", "leads"],
+      []
+    );
+
+    if (!Array.isArray(registrations)) {
+      registrations = [];
+    }
+
+    updateDateDropdown(dates);
+    updateStats();
+    renderRegistrations();
+
+    showMessage(
+      "dashboardMessage",
+      "Dashboard updated successfully.",
+      "success"
+    );
+
+  } catch (error) {
+    showMessage("dashboardMessage", error.message);
+
+  } finally {
+    $("tableLoading").style.display = "none";
+  }
+}
+
+function updateDateDropdown(dates) {
+  const select = $("dateSelect");
+  if (!select || !Array.isArray(dates)) return;
+
+  const previous = selectedDate;
+  select.innerHTML = "";
+
+  dates.forEach(function(item) {
+    const value = typeof item === "string"
+      ? item
+      : getValue(item, ["date", "name", "sheetName"], "");
+
+    if (!value) return;
+
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    select.appendChild(option);
+  });
+
+  if (previous && Array.from(select.options).some(
+    option => option.value === previous
+  )) {
+    select.value = previous;
+  } else if (select.options.length) {
+    select.selectedIndex = 0;
+  }
+
+  selectedDate = select.value;
+}
+
+/* ---------- STATISTICS ---------- */
+
+function updateStats() {
+  $("totalCount").textContent = registrations.length;
+  $("dateCount").textContent = registrations.length;
+
+  const teamStats = $("teamStats");
+  teamStats.innerHTML = "";
+
+  const counts = {};
+
+  registrations.forEach(function(record) {
+    const team = getValue(
+      record,
+      ["team", "teamName"],
+      "Not specified"
+    );
+
+    counts[team] = (counts[team] || 0) + 1;
+  });
+
+  Object.keys(counts).forEach(function(team) {
+    const item = document.createElement("div");
+    item.className = "card";
+    item.style.padding = "12px";
+    item.textContent = team + ": " + counts[team];
+    teamStats.appendChild(item);
+  });
+}
+
+/* ---------- REGISTRATION TABLE ---------- */
+
+function renderRegistrations() {
+  const body = $("registrationBody");
+  body.innerHTML = "";
+
+  const search = $("searchInput").value.toLowerCase().trim();
+
+  const filtered = registrations.filter(function(record) {
+    const text = [
+      getValue(record, ["fullName", "name"]),
+      getValue(record, ["age"]),
+      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
+      getValue(record, ["city"]),
+      getValue(record, ["email", "emailAddress"]),
+      getValue(record, ["description", "currentlyDoing"]),
+      getValue(record, ["team", "teamName"]),
+      getValue(record, ["mentor", "mentorName"])
+    ].join(" ").toLowerCase();
+
+    return text.includes(search);
+  });
+
+  if (!filtered.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 9;
+    td.textContent = "No registrations found.";
+    td.style.padding = "20px";
+    td.style.textAlign = "center";
+    tr.appendChild(td);
+    body.appendChild(tr);
+    return;
+  }
+
+  filtered.forEach(function(record) {
+    const tr = document.createElement("tr");
+
+    const values = [
+      getValue(record, ["fullName", "name"]),
+      getValue(record, ["age"]),
+      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
+      getValue(record, ["city"]),
+      getValue(record, ["email", "emailAddress"]),
+      getValue(record, ["description", "currentlyDoing"]),
+      getValue(record, ["team", "teamName"]),
+      getValue(record, ["mentor", "mentorName"])
+    ];
+
+    values.forEach(function(value) {
+      const td = document.createElement("td");
+      td.textContent = value;
+      td.style.padding = "12px";
+      td.style.borderBottom = "1px solid #333";
+      tr.appendChild(td);
+    });
+
+    const actionCell = document.createElement("td");
+    actionCell.style.padding = "12px";
+
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "secondary-btn";
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", function() {
+      openEdit(record);
+    });
+
+    actionCell.appendChild(editButton);
+    tr.appendChild(actionCell);
+    body.appendChild(tr);
+  });
+}
+
+/* ---------- EDIT REGISTRATION ---------- */
+
+function openEdit(record) {
+  editingRecord = record;
+
+  $("editName").value = getValue(record, ["fullName", "name"]);
+  $("editAge").value = getValue(record, ["age"]);
+  $("editWhatsapp").value = getValue(
+    record, ["whatsapp", "phone", "whatsappNumber"]
+  );
+  $("editCity").value = getValue(record, ["city"]);
+  $("editEmail").value = getValue(record, ["email", "emailAddress"]);
+  $("editDescription").value = getValue(
+    record, ["description", "currentlyDoing"]
+  );
+  $("editTeam").value = getValue(record, ["team", "teamName"]);
+  $("editMentor").value = getValue(record, ["mentor", "mentorName"]);
+
+  showMessage("editMessage", "");
+  $("editModal").classList.remove("hidden");
+  $("editModal").style.display = "flex";
+}
+
+function closeEditModal() {
+  $("editModal").classList.add("hidden");
+  $("editModal").style.display = "none";
+  editingRecord = null;
+}
+
+async function saveEdit(event) {
+  event.preventDefault();
+
+  if (!editingRecord) return;
+
+  const data = {
+    fullName: $("editName").value.trim(),
+    age: $("editAge").value.trim(),
+    whatsapp: $("editWhatsapp").value.trim(),
+    city: $("editCity").value.trim(),
+    email: $("editEmail").value.trim(),
+    description: $("editDescription").value.trim(),
+    team: $("editTeam").value,
+    mentor: $("editMentor").value.trim()
+  };
+
+  const rowNumber = getValue(
+    editingRecord, ["rowNumber", "row", "sheetRow"], null
+  );
+
+  const date = getValue(
+    editingRecord, ["date", "sheetName"], selectedDate
+  );
+
+  try {
+    if (!rowNumber) {
+      throw new Error("Registration row number not found.");
+    }
+
+    const result = await apiRequest(
+      "updateRegistration",
+      [authToken, date, rowNumber, data]
+    );
+
+    if (result.success === false) {
+      throw new Error(result.message || "Update failed.");
+    }
+
+    showMessage("editMessage", "Updated successfully.", "success");
+    await loadDashboard();
+    closeEditModal();
+
+  } catch (error) {
+    showMessage("editMessage", error.message);
+  }
+}
+
+/* ---------- CSV EXPORT ---------- */
+
+function exportCSV() {
+  if (!registrations.length) {
+    alert("No registrations available.");
+    return;
+  }
+
+  const headers = [
+    "Name", "Age", "WhatsApp", "City",
+    "Email", "Currently Doing", "Team", "Mentor"
+  ];
+
+  const rows = registrations.map(function(record) {
+    return [
+      getValue(record, ["fullName", "name"]),
+      getValue(record, ["age"]),
+      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
+      getValue(record, ["city"]),
+      getValue(record, ["email", "emailAddress"]),
+      getValue(record, ["description", "currentlyDoing"]),
+      getValue(record, ["team", "teamName"]),
+      getValue(record, ["mentor", "mentorName"])
+    ];
+  });
+
+  function escapeCSV(value) {
+    return '"' + String(value ?? "").replace(/"/g, '""') + '"';
+  }
+
+  const csv = [
+    headers.map(escapeCSV).join(","),
+    ...rows.map(row => row.map(escapeCSV).join(","))
+  ].join("\r\n");
+
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "registrations-" + (selectedDate || "all") + ".csv";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+/* ---------- ADMIN MANAGEMENT ---------- */
+
+async function loadAdminUsers() {
+  try {
+    const result = await apiRequest("getAdminUsers", [authToken]);
+
+    if (result.success === false) {
+      throw new Error(result.message || "Could not load admins.");
+    }
+
+    const data = result.data || result;
+    const users = getValue(data, ["users", "admins", "adminUsers"], []);
+    const body = $("adminUsersBody");
+
+    body.innerHTML = "";
+
+    if (!Array.isArray(users) || !users.length) {
+      body.innerHTML =
+        '<tr><td colspan="4">No admin users found.</td></tr>';
+      return;
+    }
+
+    users.forEach(function(user) {
+      const username = getValue(user, ["username"]);
+      const role = getValue(user, ["role"], "manager");
+      const status = getValue(user, ["active", "isActive", "status"], true);
+
+      const active = status === true ||
+        status === "true" ||
+        status === "Active" ||
+        status === "active";
+
+      const tr = document.createElement("tr");
+
+      [username, role, active ? "Active" : "Inactive"].forEach(function(value) {
+        const td = document.createElement("td");
+        td.textContent = value;
+        td.style.padding = "12px";
+        tr.appendChild(td);
+      });
+
+      const actions = document.createElement("td");
+      actions.style.padding = "12px";
+
+      const statusBtn = document.createElement("button");
+      statusBtn.className = "secondary-btn";
+      statusBtn.textContent = active ? "Deactivate" : "Activate";
+      statusBtn.addEventListener("click", function() {
+        changeAdminStatus(username, !active);
+      });
+
+      const resetBtn = document.createElement("button");
+      resetBtn.className = "secondary-btn";
+      resetBtn.textContent = "Reset Password";
+      resetBtn.style.margin = "4px";
+      resetBtn.addEventListener("click", function() {
+        openPasswordModal(username);
+      });
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "danger-btn";
+      deleteBtn.textContent = "Delete";
+      deleteBtn.addEventListener("click", function() {
+        deleteAdminUser(username);
+      });
+
+      actions.append(statusBtn, resetBtn, deleteBtn);
+      tr.appendChild(actions);
+      body.appendChild(tr);
+    });
+
+  } catch (error) {
+    showMessage("adminMessage", error.message);
+  }
+}
+
+async function createAdminUser(event) {
+  event.preventDefault();
+
+  const username = $("newUsername").value.trim();
+  const password = $("newPassword").value;
+  const role = $("newRole").value;
+
+  try {
+    const result = await apiRequest(
+      "createAdmin",
+      [authToken, username, password, role]
+    );
+
+    if (result.success === false) {
+      throw new Error(result.message || "Could not create admin.");
+    }
+
+    showMessage("adminMessage", "Admin created successfully.", "success");
+    $("createAdminForm").reset();
+    await loadAdminUsers();
+
+  } catch (error) {
+    showMessage("adminMessage", error.message);
+  }
+}
+
+async function changeAdminStatus(username, active) {
+  if (!confirm("Change status for " + username + "?")) return;
+
+  try {
+    const result = await apiRequest(
+      "setAdminStatus",
+      [authToken, username, active]
+    );
+
+    if (result.success === false) {
+      throw new Error(result.message || "Status update failed.");
+    }
+
+    await loadAdminUsers();
+    showMessage("adminMessage", "Status updated.", "success");
+
+  } catch (error) {
+    showMessage("adminMessage", error.message);
+  }
+}
+
+async function deleteAdminUser(username) {
+  if (!confirm("Delete admin " + username + "?")) return;
+
+  try {
+    const result = await apiRequest(
+      "deleteAdmin",
+      [authToken, username]
+    );
+
+    if (result.success === false) {
+      throw new Error(result.message || "Delete failed.");
+    }
+
+    await loadAdminUsers();
+    showMessage("adminMessage", "Admin deleted.", "success");
+
+  } catch (error) {
+    showMessage("adminMessage", error.message);
+  }
+}
+
+/* ---------- PASSWORD RESET ---------- */
+
+function openPasswordModal(username) {
+  $("passwordUsername").textContent = username;
+  $("resetPasswordInput").value = "";
+
+  showMessage("passwordMessage", "");
+
+  $("passwordModal").classList.remove("hidden");
+  $("passwordModal").style.display = "flex";
+}
+
+function closePasswordModal() {
+  $("passwordModal").classList.add("hidden");
+  $("passwordModal").style.display = "none";
+}
+
+async function resetAdminPassword() {
+  const username = $("passwordUsername").textContent;
+  const password = $("resetPasswordInput").value;
+  const button = $("resetPasswordBtn");
+
+  if (password.length < 6) {
+    showMessage(
+      "passwordMessage",
+      "Password must be at least 6 characters."
+    );
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "PLEASE WAIT...";
+
+  try {
+    const result = await apiRequest(
+      "resetAdminPassword",
+      [authToken, username, password]
+    );
+
+    if (result.success === false) {
+      throw new Error(result.message || "Password reset failed.");
+    }
+
+    showMessage(
+      "passwordMessage",
+      "Password updated successfully.",
+      "success"
+    );
+
+    $("resetPasswordInput").value = "";
+
+  } catch (error) {
+    showMessage("passwordMessage", error.message);
+
+  } finally {
+    button.disabled = false;
+    button.textContent = "Reset Password";
+  }
+}
+
+/* ---------- LOGOUT ---------- */
+
+async function logout() {
+  if (!confirm("Are you sure you want to logout?")) return;
+
+  try {
+    await apiRequest("adminLogout", [authToken]);
+  } catch (error) {
+    console.error(error);
+  }
+
+  authToken = "";
+  currentAdmin = null;
+  registrations = [];
+  selectedDate = "";
+
+  $("dashboardSection").classList.add("hidden");
+  $("loginSection").classList.remove("hidden");
+  $("loginPassword").value = "";
+}
+
+/* ---------- EVENT LISTENERS ---------- */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Keep admin management hidden before login.
+  $("adminManagement").style.display = "none";
+
+  $("editModal").style.display = "none";
+  $("passwordModal").style.display = "none";
+
+  $("loginForm").addEventListener("submit", handleLogin);
+
+  $("searchInput").addEventListener("input", renderRegistrations);
+
+  $("dateSelect").addEventListener("change", async function() {
+    selectedDate = this.value;
+    await loadDashboard();
+  });
+
+  $("refreshBtn").addEventListener("click", loadDashboard);
+
+  $("exportBtn").addEventListener("click", exportCSV);
+
+  $("editForm").addEventListener("submit", saveEdit);
+
+  $("closeEditBtn").addEventListener("click", closeEditModal);
+
+  $("createAdminForm").addEventListener("submit", createAdminUser);
+
+  $("resetPasswordBtn").addEventListener("click", resetAdminPassword);
+
+  $("closePasswordBtn").addEventListener("click", closePasswordModal);
+
+  $("logoutBtn").addEventListener("click", logout);
+
+});
+</script>
+
+</div>
+
+</body>
+</html>
