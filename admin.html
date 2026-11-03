@@ -3,1487 +3,708 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
-
-<title>Admin Panel | Bootcamp Registration</title>
-
+<title>Bootcamp Admin Dashboard</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --bg:#090909;--panel:#151515;--panel2:#1d1d1d;
+  --gold:#d6ad55;--gold2:#f1d58b;--text:#f5f5f5;
+  --muted:#aaa;--border:#333;--red:#e45c5c;--green:#50c878;
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #080808;
-  color: #ffffff;
-  min-height: 100vh;
-}
-
-:root {
-  --gold: #d4af37;
-  --gold-light: #f5d76e;
-  --dark: #080808;
-  --card: #151515;
-  --border: #333333;
-  --muted: #aaaaaa;
-  --danger: #e74c3c;
-  --success: #27ae60;
-}
-
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.container {
-  width: 100%;
-  max-width: 1400px;
-  margin: auto;
-  padding: 20px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.gold {
-  color: var(--gold);
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.section-title {
-  font-size: 22px;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 13px;
-  margin-top: 8px;
-  margin-bottom: 15px;
-  background: #101010;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  color: white;
-  outline: none;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: var(--gold);
-}
-
-label {
-  font-size: 14px;
-  color: #dddddd;
-}
-
-.primary-btn {
-  background: linear-gradient(
-    135deg,
-    var(--gold),
-    var(--gold-light)
-  );
-  color: #111111;
-  border: none;
-  padding: 13px 20px;
-  border-radius: 7px;
-  font-weight: bold;
-}
-
-.secondary-btn {
-  background: #252525;
-  color: white;
-  border: 1px solid var(--border);
-  padding: 11px 16px;
-  border-radius: 7px;
-}
-
-.danger-btn {
-  background: #7f1d1d;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
-}
-
-.message {
-  font-size: 13px;
-  margin-top: 10px;
-  min-height: 18px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  padding: 18px 20px;
-  background: #111111;
-  border-bottom: 1px solid var(--border);
-}
-
-.header h2 {
-  color: var(--gold);
-  font-size: 21px;
-}
-
-@media(max-width:600px) {
-  .container {
-    padding: 12px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  .header h2 {
-    font-size: 18px;
-  }
-}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+header{padding:17px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#101010}
+.logo{font-size:19px;font-weight:800;letter-spacing:1px;color:var(--gold)}
+.logo span{color:white}
+.container{max-width:1450px;margin:auto;padding:22px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:18px;margin-bottom:18px}
+h2,h3{margin-top:0}
+h2{font-size:22px}
+h3{font-size:17px;color:var(--gold)}
+.muted{color:var(--muted);font-size:13px}
+.gold{color:var(--gold)}
+.btn{border:0;border-radius:8px;padding:11px 15px;font-weight:700;background:var(--gold);color:#111}
+.btn:hover{background:var(--gold2)}
+.btn.secondary{background:#292929;color:white;border:1px solid #444}
+.btn.danger{background:#572525;color:#fff}
+.btn.small{padding:7px 10px;font-size:12px}
+input,select{width:100%;padding:12px;background:#101010;border:1px solid #414141;border-radius:8px;color:white;outline:none}
+input:focus,select:focus{border-color:var(--gold)}
+label{display:block;font-size:13px;color:#ccc;margin:12px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.stat{background:#111;border:1px solid #333;padding:17px;border-radius:10px}
+.stat strong{display:block;font-size:27px;color:var(--gold);margin-top:8px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{background:#222;border:1px solid #444;color:white;border-radius:8px;padding:11px 15px}
+.tab.active{background:var(--gold);color:#111;border-color:var(--gold);font-weight:bold}
+.toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:15px 0}
+.table-wrap{overflow:auto;border:1px solid #333;border-radius:9px}
+table{border-collapse:collapse;width:100%;min-width:950px}
+th,td{padding:12px 10px;border-bottom:1px solid #303030;text-align:left;font-size:13px}
+th{background:#222;color:var(--gold);position:sticky;top:0}
+tr:hover td{background:#1c1c1c}
+.badge{display:inline-block;background:#302719;color:var(--gold2);padding:5px 8px;border-radius:20px;font-size:11px}
+.message{padding:12px;border-radius:8px;margin:12px 0;font-size:13px;display:none}
+.message.error{display:block;background:#401e1e;color:#ffb3b3}
+.message.success{display:block;background:#173522;color:#a7efb9}
+.login-wrap{max-width:420px;margin:9vh auto;padding:20px}
+.login-card{background:var(--panel);border:1px solid #3a3325;border-radius:16px;padding:25px}
+.login-card h2{text-align:center;color:var(--gold)}
+.login-card .btn{width:100%;margin-top:18px}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}
+.empty{text-align:center;color:#aaa;padding:30px}
+.modal{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:15px;z-index:10}
+.modal-box{width:min(600px,100%);max-height:90vh;overflow:auto;background:#171717;border:1px solid #514329;border-radius:14px;padding:20px}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.container{padding:12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar,.form-grid{grid-template-columns:1fr}header{padding:14px}.stat{padding:12px}.stat strong{font-size:22px}}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-  <h2>BOOTCAMP <span class="gold">ADMIN</span></h2>
-  <span style="color:#999;font-size:12px;">
-    REGISTRATION MANAGEMENT SYSTEM
-  </span>
+<header>
+  <div class="logo">BOOTCAMP <span>ADMIN</span></div>
+  <div id="headerUser" class="muted"></div>
+  <button id="logoutBtn" class="btn secondary hidden" onclick="logout()">Logout</button>
+</header>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <h2>ADMIN LOGIN</h2>
+    <p class="muted" style="text-align:center">Sign in to manage registrations</p>
+    <label>Username</label>
+    <input id="loginUsername" autocomplete="username" placeholder="Enter username">
+    <label>Password</label>
+    <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password">
+    <div id="loginMessage" class="message"></div>
+    <button class="btn" onclick="login()">LOGIN</button>
+  </div>
 </div>
 
-<div class="container">
-
-<!-- PART 2 WILL CONTINUE HERE -->
-  <!-- =================================
-     PART 2: ADMIN LOGIN
-================================= -->
-
-<section id="loginSection" style="
-  max-width:420px;
-  margin:55px auto;
-">
-
-  <div class="card">
-
-    <div style="text-align:center;margin-bottom:25px;">
-
-      <div style="
-        font-size:35px;
-        color:var(--gold);
-        margin-bottom:10px;
-      ">◆</div>
-
-      <h2 class="section-title" style="margin-bottom:8px;">
-        ADMIN LOGIN
-      </h2>
-
-      <p style="color:var(--muted);font-size:13px;">
-        Login to access your registration dashboard
-      </p>
-
-    </div>
-
-    <form id="loginForm">
-
-      <label for="loginUsername">
-        Username
-      </label>
-
-      <input
-        type="text"
-        id="loginUsername"
-        placeholder="Enter username"
-        autocomplete="username"
-        required
-      >
-
-      <label for="loginPassword">
-        Password
-      </label>
-
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Enter password"
-        autocomplete="current-password"
-        required
-      >
-
-      <button
-        type="submit"
-        id="loginBtn"
-        class="primary-btn"
-        style="width:100%;margin-top:8px;"
-      >
-        LOGIN TO DASHBOARD
-      </button>
-
-      <div
-        id="loginMessage"
-        class="message"
-        role="status"
-      ></div>
-
-    </form>
-
-  </div>
-
-  <p style="
-    text-align:center;
-    color:#666;
-    font-size:12px;
-    margin-top:20px;
-  ">
-    Secure Admin Access
-  </p>
-
-</section>
-  <!-- =================================
-     PART 3: DASHBOARD + REGISTRATIONS
-================================= -->
-
-<section id="dashboardSection" class="hidden">
-
-  <!-- DASHBOARD HEADER -->
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:15px;
-    margin:25px 0;
-  ">
-
+<div id="dashboard" class="container hidden">
+  <div class="section-title">
     <div>
-      <h2 class="section-title" style="margin-bottom:5px;">
-        Dashboard
-      </h2>
-
-      <p style="color:var(--muted);font-size:13px;">
-        Welcome, <span id="userInfo" class="gold"></span>
-      </p>
+      <h2>Dashboard</h2>
+      <p class="muted" id="welcomeText"></p>
     </div>
-
-    <button
-      type="button"
-      id="logoutBtn"
-      class="danger-btn"
-    >
-      Logout
-    </button>
-
+    <span class="badge" id="roleBadge"></span>
   </div>
 
-
-  <!-- STATISTICS -->
-
-  <div style="
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:15px;
-    margin-bottom:25px;
-  ">
-
-    <div class="card">
-      <p style="color:var(--muted);font-size:13px;">
-        Total Registrations
-      </p>
-
-      <h2
-        id="totalCount"
-        class="gold"
-        style="font-size:30px;margin-top:10px;"
-      >0</h2>
-    </div>
-
-    <div class="card">
-      <p style="color:var(--muted);font-size:13px;">
-        Selected Date Registrations
-      </p>
-
-      <h2
-        id="dateCount"
-        class="gold"
-        style="font-size:30px;margin-top:10px;"
-      >0</h2>
-    </div>
-
+  <div class="grid" style="margin:18px 0">
+    <div class="stat">Registrations<strong id="totalCount">0</strong></div>
+    <div class="stat">Shivam<strong id="countShivam">0</strong></div>
+    <div class="stat">Jatin<strong id="countJatin">0</strong></div>
+    <div class="stat">Sahil<strong id="countSahil">0</strong></div>
+    <div class="stat">Ketan<strong id="countKetan">0</strong></div>
+    <div class="stat">Megha<strong id="countMegha">0</strong></div>
+    <div class="stat">Ishika<strong id="countIshika">0</strong></div>
   </div>
 
-
-  <!-- TEAM STATISTICS -->
-
-  <div class="card" style="margin-bottom:25px;">
-
-    <h3 class="section-title">
-      Team Statistics
-    </h3>
-
-    <div
-      id="teamStats"
-      style="
-        display:flex;
-        flex-wrap:wrap;
-        gap:10px;
-      "
-    ></div>
-
+  <div class="tabs">
+    <button id="myTeamTab" class="tab active" onclick="changeTab('mine')">My Team</button>
+    <button id="allTab" class="tab" onclick="changeTab('all')">All Registrations</button>
+    <button id="usersTab" class="tab hidden" onclick="changeTab('users')">Manage Accounts</button>
   </div>
 
-
-  <!-- REGISTRATION MANAGEMENT -->
-
-  <div class="card">
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:20px;
-    ">
-
-      <h3 class="section-title" style="margin:0;">
-        Registrations
-      </h3>
-
-      <div style="
-        display:flex;
-        flex-wrap:wrap;
-        gap:8px;
-      ">
-
-        <button
-          type="button"
-          id="refreshBtn"
-          class="secondary-btn"
-        >
-          Refresh
-        </button>
-
-        <button
-          type="button"
-          id="exportBtn"
-          class="primary-btn"
-        >
-          Export CSV
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- FILTERS -->
-
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:12px;
-    ">
-
+  <section id="registrationSection" class="card">
+    <div class="section-title">
       <div>
-        <label for="dateSelect">
-          Select Registration Date
-        </label>
+        <h3 id="sectionHeading">My Team Registrations</h3>
+        <p class="muted" id="sectionDescription">Your team's registration records</p>
+      </div>
+      <button class="btn secondary" onclick="loadData()">Refresh</button>
+    </div>
 
-        <select id="dateSelect">
+    <div class="toolbar">
+      <div>
+        <label>Date</label>
+        <select id="dateSelect" onchange="loadData()">
           <option value="">Loading dates...</option>
         </select>
       </div>
-
-      <div>
-        <label for="searchInput">
-          Search Registration
-        </label>
-
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Search name, phone, city..."
-        >
+      <div id="teamFilterWrap" class="hidden">
+        <label>Select Team</label>
+        <select id="teamFilter" onchange="loadData()"></select>
       </div>
-
+      <div>
+        <label>Search</label>
+        <input id="searchInput" placeholder="Name, phone, city..." oninput="debouncedSearch()">
+      </div>
+      <div style="display:flex;align-items:end">
+        <button class="btn" style="width:100%" onclick="exportCSV()">Export CSV</button>
+      </div>
     </div>
 
-
-    <div
-      id="dashboardMessage"
-      class="message"
-      role="status"
-    ></div>
-
-
-    <div
-      id="tableLoading"
-      style="
-        display:none;
-        text-align:center;
-        padding:20px;
-        color:var(--gold);
-      "
-    >
-      Loading registrations...
-    </div>
-
-
-    <!-- TABLE -->
-
-    <div style="
-      overflow-x:auto;
-      width:100%;
-      margin-top:15px;
-    ">
-
-      <table style="
-        width:100%;
-        min-width:950px;
-        border-collapse:collapse;
-        font-size:13px;
-      ">
-
+    <div id="dataMessage" class="message"></div>
+    <div class="table-wrap">
+      <table>
         <thead>
-          <tr style="
-            background:#242424;
-            color:var(--gold);
-            text-align:left;
-          ">
-
-            <th style="padding:13px;">Name</th>
-            <th style="padding:13px;">Age</th>
-            <th style="padding:13px;">WhatsApp</th>
-            <th style="padding:13px;">City</th>
-            <th style="padding:13px;">Email</th>
-            <th style="padding:13px;">Currently Doing</th>
-            <th style="padding:13px;">Team</th>
-            <th style="padding:13px;">Mentor</th>
-            <th style="padding:13px;">Action</th>
-
+          <tr>
+            <th>#</th><th>Timestamp</th><th>Name</th><th>Age</th>
+            <th>WhatsApp</th><th>City</th><th>Email</th>
+            <th>Status</th><th>Team</th><th>Mentor</th><th>Action</th>
           </tr>
         </thead>
-
-        <tbody id="registrationBody">
-
-          <tr>
-            <td
-              colspan="9"
-              style="
-                padding:25px;
-                text-align:center;
-                color:#888;
-              "
-            >
-              No registrations loaded.
-            </td>
-          </tr>
-
+        <tbody id="registrationRows">
+          <tr><td colspan="11" class="empty">Loading registrations...</td></tr>
         </tbody>
-
       </table>
+    </div>
+  </section>
 
+  <section id="usersSection" class="card hidden">
+    <div class="section-title">
+      <div>
+        <h3>Manage Admin & Manager Accounts</h3>
+        <p class="muted">Create and manage team accounts</p>
+      </div>
+      <button class="btn secondary" onclick="loadUsers()">Refresh</button>
     </div>
 
-  </div>
-
-</section>
-  <!-- =================================
-     PART 4: EDIT + ADMIN MANAGEMENT
-================================= -->
-
-<!-- EDIT REGISTRATION MODAL -->
-
-<div
-  id="editModal"
-  class="hidden"
-  style="
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    z-index:1000;
-    padding:20px;
-    overflow-y:auto;
-    align-items:center;
-    justify-content:center;
-  "
->
-
-  <div class="card" style="width:100%;max-width:550px;margin:auto;">
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    ">
-
-      <h3 class="section-title" style="margin:0;">
-        Edit Registration
-      </h3>
-
-      <button
-        type="button"
-        id="closeEditBtn"
-        class="secondary-btn"
-      >✕</button>
-
+    <div class="card" style="background:#101010">
+      <h3>Create New Account</h3>
+      <div class="form-grid">
+        <div>
+          <label>Username</label>
+          <input id="newUsername" placeholder="Create username">
+        </div>
+        <div>
+          <label>Password (minimum 8 characters)</label>
+          <input id="newPassword" type="password" placeholder="Create password">
+        </div>
+        <div>
+          <label>Account Role</label>
+          <select id="newRole">
+            <option value="ADMIN">Admin</option>
+            <option value="MANAGER">Manager</option>
+          </select>
+        </div>
+        <div>
+          <label>Assign Team</label>
+          <select id="newTeam"></select>
+        </div>
+      </div>
+      <div id="createMessage" class="message"></div>
+      <button class="btn" onclick="createUser()">CREATE ACCOUNT</button>
     </div>
 
-    <form id="editForm">
-
-      <label for="editName">Full Name</label>
-      <input type="text" id="editName" required>
-
-      <label for="editAge">Age</label>
-      <input type="number" id="editAge" min="18" max="60" required>
-
-      <label for="editWhatsapp">WhatsApp Number</label>
-      <input type="tel" id="editWhatsapp" required>
-
-      <label for="editCity">City</label>
-      <input type="text" id="editCity" required>
-
-      <label for="editEmail">Email Address</label>
-      <input type="email" id="editEmail">
-
-      <label for="editDescription">Currently Doing</label>
-      <input type="text" id="editDescription">
-
-      <label for="editTeam">Team</label>
-      <select id="editTeam">
-        <option value="TEAM SHIVAM">TEAM SHIVAM</option>
-        <option value="TEAM JATIN">TEAM JATIN</option>
-        <option value="TEAM SAHIL">TEAM SAHIL</option>
-        <option value="TEAM KETAN">TEAM KETAN</option>
-        <option value="TEAM MEGHA">TEAM MEGHA</option>
-        <option value="TEAM ISHIKA">TEAM ISHIKA</option>
-      </select>
-
-      <label for="editMentor">Mentor Name</label>
-      <input type="text" id="editMentor">
-
-      <div
-        id="editMessage"
-        class="message"
-        role="status"
-      ></div>
-
-      <button
-        type="submit"
-        class="primary-btn"
-        style="width:100%;"
-      >
-        Save Changes
-      </button>
-
-    </form>
-
-  </div>
-
+    <h3>Existing Accounts</h3>
+    <div class="table-wrap">
+      <table style="min-width:600px">
+        <thead><tr><th>Username</th><th>Role</th><th>Team</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="userRows"><tr><td colspan="5" class="empty">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </section>
 </div>
 
-
-<!-- ADMIN MANAGEMENT -->
-
-<section
-  id="adminManagement"
-  class="card"
-  style="margin-top:25px;"
->
-
-  <h3 class="section-title">
-    Admin Management
-  </h3>
-
-  <form
-    id="createAdminForm"
-    style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:10px;
-      align-items:end;
-    "
-  >
-
-    <div>
-      <label for="newUsername">New Username</label>
-      <input
-        type="text"
-        id="newUsername"
-        placeholder="Enter username"
-        required
-      >
+<div id="editModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="section-title">
+      <h3>Edit Registration</h3>
+      <button class="btn secondary small" onclick="closeEdit()">Close</button>
     </div>
-
-    <div>
-      <label for="newPassword">Password</label>
-      <input
-        type="password"
-        id="newPassword"
-        placeholder="Enter password"
-        required
-      >
+    <input type="hidden" id="editRow">
+    <div class="form-grid">
+      <div><label>Full Name</label><input id="editName"></div>
+      <div><label>Age</label><input id="editAge" type="number" min="18" max="60"></div>
+      <div><label>WhatsApp</label><input id="editPhone"></div>
+      <div><label>City</label><input id="editCity"></div>
+      <div><label>Email</label><input id="editEmail" type="email"></div>
+      <div><label>Status</label>
+        <select id="editOccupation">
+          <option>Student</option>
+          <option>Housewife</option>
+          <option>Job-Holder</option>
+          <option>Businessman</option>
+          <option>Unemployed</option>
+        </select>
+      </div>
+      <div><label>Team</label><select id="editTeam"></select></div>
+      <div><label>Mentor Name</label><input id="editMentor"></div>
     </div>
-
-    <div>
-      <label for="newRole">Role</label>
-      <select id="newRole" required>
-        <option value="manager">Manager</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-
-    <button
-      type="submit"
-      class="primary-btn"
-      style="margin-bottom:15px;"
-    >
-      Create Admin
-    </button>
-
-  </form>
-
-  <div
-    id="adminMessage"
-    class="message"
-    role="status"
-  ></div>
-
-  <h4 style="margin:20px 0 12px;color:var(--gold);">
-    Existing Admin Users
-  </h4>
-
-  <div style="overflow-x:auto;">
-
-    <table style="
-      width:100%;
-      min-width:550px;
-      border-collapse:collapse;
-      font-size:13px;
-    ">
-
-      <thead>
-        <tr style="background:#242424;color:var(--gold);">
-          <th style="padding:12px;text-align:left;">Username</th>
-          <th style="padding:12px;text-align:left;">Role</th>
-          <th style="padding:12px;text-align:left;">Status</th>
-          <th style="padding:12px;text-align:left;">Actions</th>
-        </tr>
-      </thead>
-
-      <tbody id="adminUsersBody">
-        <tr>
-          <td colspan="4" style="padding:15px;text-align:center;">
-            Admin users will appear here.
-          </td>
-        </tr>
-      </tbody>
-
-    </table>
-
+    <div id="editMessage" class="message"></div>
+    <button class="btn" onclick="saveEdit()">SAVE CHANGES</button>
   </div>
-
-</section>
-
-
-<!-- PASSWORD RESET MODAL -->
-
-<div
-  id="passwordModal"
-  class="hidden"
-  style="
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    z-index:1100;
-    padding:20px;
-    align-items:center;
-    justify-content:center;
-  "
->
-
-  <div class="card" style="width:100%;max-width:400px;margin:auto;">
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    ">
-
-      <h3 class="section-title" style="margin:0;">
-        Reset Password
-      </h3>
-
-      <button
-        type="button"
-        id="closePasswordBtn"
-        class="secondary-btn"
-      >✕</button>
-
-    </div>
-
-    <p style="color:var(--muted);font-size:13px;margin-bottom:15px;">
-      Username:
-      <strong id="passwordUsername" class="gold"></strong>
-    </p>
-
-    <label for="resetPasswordInput">
-      New Password
-    </label>
-
-    <input
-      type="password"
-      id="resetPasswordInput"
-      placeholder="Enter new password"
-      minlength="6"
-      required
-    >
-
-    <div
-      id="passwordMessage"
-      class="message"
-      role="status"
-    ></div>
-
-    <button
-      type="button"
-      id="resetPasswordBtn"
-      class="primary-btn"
-      style="width:100%;"
-    >
-      Reset Password
-    </button>
-
-  </div>
-
 </div>
-  <!-- =================================
-     PART 5: JAVASCRIPT + API
-================================= -->
 
 <script>
-"use strict";
+const API = '/.netlify/functions/api';
 
-const API_URL = "/.netlify/functions/api";
+const TEAMS = [
+  'TEAM SHIVAM','TEAM JATIN','TEAM SAHIL',
+  'TEAM KETAN','TEAM MEGHA','TEAM ISHIKA'
+];
 
-let authToken = "";
-let currentAdmin = null;
-let selectedDate = "";
+let token = '';
+let currentUser = null;
+let currentMode = 'mine';
 let registrations = [];
-let editingRecord = null;
+let users = [];
+let searchTimer = null;
+let selectedDate = '';
 
-function $(id) {
-  return document.getElementById(id);
+function esc(value) {
+  return String(value == null ? '' : value).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
 }
 
-function getValue(obj, keys, fallback = "") {
-  for (const key of keys) {
-    if (obj && obj[key] !== undefined && obj[key] !== null) {
-      return obj[key];
-    }
-  }
-  return fallback;
+function showMessage(id, text, type='error') {
+  const el = document.getElementById(id);
+  el.className = 'message ' + type;
+  el.textContent = text;
 }
 
-function showMessage(id, message, type = "error") {
-  const el = $(id);
-  if (!el) return;
-
-  el.textContent = message;
-  el.style.color = type === "success" ? "#27ae60" : "#ef4444";
+function hideMessage(id) {
+  const el = document.getElementById(id);
+  el.className = 'message';
+  el.textContent = '';
 }
 
-async function apiRequest(action, args = []) {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ action, args })
+async function api(action, args=[]) {
+  const response = await fetch(API, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action,args})
   });
 
   const result = await response.json();
 
   if (!response.ok) {
-    throw new Error(result.message || "Server error.");
+    throw new Error(result.message || 'Server request failed.');
   }
 
   return result;
 }
 
-/* ---------- LOGIN ---------- */
+async function login() {
+  hideMessage('loginMessage');
 
-async function handleLogin(event) {
-  event.preventDefault();
-
-  const username = $("loginUsername").value.trim();
-  const password = $("loginPassword").value;
-  const button = $("loginBtn");
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
 
   if (!username || !password) {
-    showMessage("loginMessage", "Enter username and password.");
+    showMessage('loginMessage','Enter username and password.');
     return;
   }
 
-  button.disabled = true;
-  button.textContent = "PLEASE WAIT...";
-  showMessage("loginMessage", "");
-
   try {
-    const result = await apiRequest(
-      "adminLogin",
-      [username, password]
-    );
+    const r = await api('adminLogin',[username,password]);
 
-    if (!result || result.success === false) {
-      throw new Error(result.message || "Login failed.");
+    if (!r.success) throw new Error(r.message || 'Login failed.');
+
+    token = r.token;
+    currentUser = r.user;
+
+    if (!currentUser) throw new Error('User details missing from server response.');
+
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('logoutBtn').classList.remove('hidden');
+
+    document.getElementById('headerUser').textContent = currentUser.username;
+    document.getElementById('welcomeText').textContent =
+      'Welcome, ' + currentUser.username + ' — ' + currentUser.role;
+    document.getElementById('roleBadge').textContent = currentUser.role;
+
+    if (currentUser.role === 'SUPERADMIN') {
+      document.getElementById('usersTab').classList.remove('hidden');
     }
 
-    const data = result.data || result;
+    fillTeamSelectors();
+    await loadData();
 
-    authToken = getValue(data, ["token", "authToken"], "");
-
-    if (!authToken) {
-      throw new Error("Login token not received.");
-    }
-
-    currentAdmin = {
-      username: getValue(data, ["username"], username),
-      role: getValue(data, ["role"], "")
-    };
-
-    $("loginSection").classList.add("hidden");
-    $("dashboardSection").classList.remove("hidden");
-
-    $("userInfo").textContent =
-      currentAdmin.username + " (" + currentAdmin.role + ")";
-
-    // Admin management is visible only to admin roles.
-    const role = String(currentAdmin.role).toLowerCase();
-
-    if (role === "admin" || role === "superadmin" ||
-        role === "super_admin") {
-      $("adminManagement").style.display = "block";
-      await loadAdminUsers();
-    } else {
-      $("adminManagement").style.display = "none";
-    }
-
-    await loadDashboard();
-
-  } catch (error) {
-    showMessage("loginMessage", error.message);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = "LOGIN TO DASHBOARD";
+  } catch (e) {
+    showMessage('loginMessage',e.message);
   }
 }
 
-/* ---------- DASHBOARD ---------- */
+function logout() {
+  if (token) api('adminLogout',[token]).catch(()=>{});
 
-async function loadDashboard() {
-  if (!authToken) return;
+  token = '';
+  currentUser = null;
+  registrations = [];
 
-  showMessage("dashboardMessage", "Loading dashboard...", "success");
-  $("tableLoading").style.display = "block";
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('logoutBtn').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('headerUser').textContent = '';
+}
 
-  try {
-    const result = await apiRequest(
-      "getDashboardData",
-      [authToken, selectedDate]
+function fillTeamSelectors() {
+  const filter = document.getElementById('teamFilter');
+  const newTeam = document.getElementById('newTeam');
+  const editTeam = document.getElementById('editTeam');
+
+  filter.innerHTML = '';
+  newTeam.innerHTML = '';
+  editTeam.innerHTML = '';
+
+  if (currentUser.role === 'SUPERADMIN') {
+    filter.add(new Option('All Teams','ALL'));
+  }
+
+  TEAMS.forEach(team => {
+    filter.add(new Option(team,team));
+    newTeam.add(new Option(team,team));
+    editTeam.add(new Option(team,team));
+  });
+
+  if (currentUser.role !== 'SUPERADMIN') {
+    document.getElementById('teamFilterWrap').classList.add('hidden');
+    filter.value = currentUser.team;
+  }
+}
+
+function changeTab(mode) {
+  currentMode = mode;
+
+  document.getElementById('registrationSection').classList.toggle('hidden',mode==='users');
+  document.getElementById('usersSection').classList.toggle('hidden',mode!=='users');
+
+  ['mine','all','users'].forEach(id => {
+    const el = document.getElementById(
+      id==='mine'?'myTeamTab':id==='all'?'allTab':'usersTab'
     );
+    el.classList.toggle('active',id===mode);
+  });
 
-    if (!result || result.success === false) {
-      throw new Error(result.message || "Dashboard loading failed.");
+  if (mode === 'mine') {
+    document.getElementById('sectionHeading').textContent = 'My Team Registrations';
+    document.getElementById('sectionDescription').textContent =
+      'Registrations assigned to your team';
+    document.getElementById('teamFilterWrap').classList.add('hidden');
+    loadData();
+  }
+
+  if (mode === 'all') {
+    document.getElementById('sectionHeading').textContent = 'All Registrations';
+    document.getElementById('sectionDescription').textContent =
+      'Select a team to view its registrations';
+    document.getElementById('teamFilterWrap').classList.remove('hidden');
+
+    if (currentUser.role !== 'SUPERADMIN') {
+      document.getElementById('teamFilter').value = '';
     }
 
-    const data = result.data || result;
+    loadData();
+  }
 
-    const dates = getValue(
-      data,
-      ["dates", "dateTabs", "availableDates"],
-      []
-    );
+  if (mode === 'users') loadUsers();
+}
 
-    registrations = getValue(
-      data,
-      ["registrations", "records", "leads"],
-      []
-    );
+function debouncedSearch() {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(loadData,350);
+}
 
-    if (!Array.isArray(registrations)) {
+async function loadData() {
+  if (!token || currentMode==='users') return;
+
+  hideMessage('dataMessage');
+
+  const date = document.getElementById('dateSelect').value || '';
+  const search = document.getElementById('searchInput').value.trim();
+
+  let team = '';
+  if (currentMode === 'all') {
+    team = document.getElementById('teamFilter').value;
+
+    if (currentUser.role !== 'SUPERADMIN' && !team) {
       registrations = [];
+      renderRows();
+      document.getElementById('totalCount').textContent = '0';
+      showMessage('dataMessage','Select a team to view its registrations.','success');
+      return;
+    }
+  } else if (currentUser.role !== 'SUPERADMIN') {
+    team = currentUser.team;
+  }
+
+  try {
+    const r = await api('getDashboardData',[
+      token,date,search,team,currentMode
+    ]);
+
+    if (!r.success) throw new Error(r.message || 'Could not load registrations.');
+
+    registrations = r.rows || r.registrations || [];
+
+    const dateSelect = document.getElementById('dateSelect');
+    const oldDate = dateSelect.value;
+
+    if (Array.isArray(r.dates)) {
+      dateSelect.innerHTML = '';
+      r.dates.forEach(d => dateSelect.add(new Option(d,d)));
+
+      if (r.selectedDate) dateSelect.value = r.selectedDate;
+      else if (oldDate && r.dates.includes(oldDate)) dateSelect.value = oldDate;
     }
 
-    updateDateDropdown(dates);
-    updateStats();
-    renderRegistrations();
+    selectedDate = dateSelect.value;
+    updateCounts(r.counts || {});
+    renderRows();
 
-    showMessage(
-      "dashboardMessage",
-      "Dashboard updated successfully.",
-      "success"
-    );
-
-  } catch (error) {
-    showMessage("dashboardMessage", error.message);
-
-  } finally {
-    $("tableLoading").style.display = "none";
+  } catch (e) {
+    showMessage('dataMessage',e.message);
+    registrations = [];
+    renderRows();
   }
 }
 
-function updateDateDropdown(dates) {
-  const select = $("dateSelect");
-  if (!select || !Array.isArray(dates)) return;
+function updateCounts(counts) {
+  const teams = counts.teams || {};
+  document.getElementById('totalCount').textContent = counts.total || 0;
 
-  const previous = selectedDate;
-  select.innerHTML = "";
-
-  dates.forEach(function(item) {
-    const value = typeof item === "string"
-      ? item
-      : getValue(item, ["date", "name", "sheetName"], "");
-
-    if (!value) return;
-
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = value;
-    select.appendChild(option);
-  });
-
-  if (previous && Array.from(select.options).some(
-    option => option.value === previous
-  )) {
-    select.value = previous;
-  } else if (select.options.length) {
-    select.selectedIndex = 0;
-  }
-
-  selectedDate = select.value;
-}
-
-/* ---------- STATISTICS ---------- */
-
-function updateStats() {
-  $("totalCount").textContent = registrations.length;
-  $("dateCount").textContent = registrations.length;
-
-  const teamStats = $("teamStats");
-  teamStats.innerHTML = "";
-
-  const counts = {};
-
-  registrations.forEach(function(record) {
-    const team = getValue(
-      record,
-      ["team", "teamName"],
-      "Not specified"
-    );
-
-    counts[team] = (counts[team] || 0) + 1;
-  });
-
-  Object.keys(counts).forEach(function(team) {
-    const item = document.createElement("div");
-    item.className = "card";
-    item.style.padding = "12px";
-    item.textContent = team + ": " + counts[team];
-    teamStats.appendChild(item);
-  });
-}
-
-/* ---------- REGISTRATION TABLE ---------- */
-
-function renderRegistrations() {
-  const body = $("registrationBody");
-  body.innerHTML = "";
-
-  const search = $("searchInput").value.toLowerCase().trim();
-
-  const filtered = registrations.filter(function(record) {
-    const text = [
-      getValue(record, ["fullName", "name"]),
-      getValue(record, ["age"]),
-      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
-      getValue(record, ["city"]),
-      getValue(record, ["email", "emailAddress"]),
-      getValue(record, ["description", "currentlyDoing"]),
-      getValue(record, ["team", "teamName"]),
-      getValue(record, ["mentor", "mentorName"])
-    ].join(" ").toLowerCase();
-
-    return text.includes(search);
-  });
-
-  if (!filtered.length) {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.colSpan = 9;
-    td.textContent = "No registrations found.";
-    td.style.padding = "20px";
-    td.style.textAlign = "center";
-    tr.appendChild(td);
-    body.appendChild(tr);
-    return;
-  }
-
-  filtered.forEach(function(record) {
-    const tr = document.createElement("tr");
-
-    const values = [
-      getValue(record, ["fullName", "name"]),
-      getValue(record, ["age"]),
-      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
-      getValue(record, ["city"]),
-      getValue(record, ["email", "emailAddress"]),
-      getValue(record, ["description", "currentlyDoing"]),
-      getValue(record, ["team", "teamName"]),
-      getValue(record, ["mentor", "mentorName"])
-    ];
-
-    values.forEach(function(value) {
-      const td = document.createElement("td");
-      td.textContent = value;
-      td.style.padding = "12px";
-      td.style.borderBottom = "1px solid #333";
-      tr.appendChild(td);
-    });
-
-    const actionCell = document.createElement("td");
-    actionCell.style.padding = "12px";
-
-    const editButton = document.createElement("button");
-    editButton.type = "button";
-    editButton.className = "secondary-btn";
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", function() {
-      openEdit(record);
-    });
-
-    actionCell.appendChild(editButton);
-    tr.appendChild(actionCell);
-    body.appendChild(tr);
-  });
-}
-
-/* ---------- EDIT REGISTRATION ---------- */
-
-function openEdit(record) {
-  editingRecord = record;
-
-  $("editName").value = getValue(record, ["fullName", "name"]);
-  $("editAge").value = getValue(record, ["age"]);
-  $("editWhatsapp").value = getValue(
-    record, ["whatsapp", "phone", "whatsappNumber"]
-  );
-  $("editCity").value = getValue(record, ["city"]);
-  $("editEmail").value = getValue(record, ["email", "emailAddress"]);
-  $("editDescription").value = getValue(
-    record, ["description", "currentlyDoing"]
-  );
-  $("editTeam").value = getValue(record, ["team", "teamName"]);
-  $("editMentor").value = getValue(record, ["mentor", "mentorName"]);
-
-  showMessage("editMessage", "");
-  $("editModal").classList.remove("hidden");
-  $("editModal").style.display = "flex";
-}
-
-function closeEditModal() {
-  $("editModal").classList.add("hidden");
-  $("editModal").style.display = "none";
-  editingRecord = null;
-}
-
-async function saveEdit(event) {
-  event.preventDefault();
-
-  if (!editingRecord) return;
-
-  const data = {
-    fullName: $("editName").value.trim(),
-    age: $("editAge").value.trim(),
-    whatsapp: $("editWhatsapp").value.trim(),
-    city: $("editCity").value.trim(),
-    email: $("editEmail").value.trim(),
-    description: $("editDescription").value.trim(),
-    team: $("editTeam").value,
-    mentor: $("editMentor").value.trim()
+  const ids = {
+    'TEAM SHIVAM':'countShivam',
+    'TEAM JATIN':'countJatin',
+    'TEAM SAHIL':'countSahil',
+    'TEAM KETAN':'countKetan',
+    'TEAM MEGHA':'countMegha',
+    'TEAM ISHIKA':'countIshika'
   };
 
-  const rowNumber = getValue(
-    editingRecord, ["rowNumber", "row", "sheetRow"], null
-  );
-
-  const date = getValue(
-    editingRecord, ["date", "sheetName"], selectedDate
-  );
-
-  try {
-    if (!rowNumber) {
-      throw new Error("Registration row number not found.");
-    }
-
-    const result = await apiRequest(
-      "updateRegistration",
-      [authToken, date, rowNumber, data]
-    );
-
-    if (result.success === false) {
-      throw new Error(result.message || "Update failed.");
-    }
-
-    showMessage("editMessage", "Updated successfully.", "success");
-    await loadDashboard();
-    closeEditModal();
-
-  } catch (error) {
-    showMessage("editMessage", error.message);
-  }
+  Object.keys(ids).forEach(t => {
+    document.getElementById(ids[t]).textContent = teams[t] || 0;
+  });
 }
 
-/* ---------- CSV EXPORT ---------- */
+function renderRows() {
+  const body = document.getElementById('registrationRows');
+
+  if (!registrations.length) {
+    body.innerHTML = '<tr><td colspan="11" class="empty">No registrations found.</td></tr>';
+    return;
+  }
+
+  body.innerHTML = registrations.map((r,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td>${esc(r.timestamp)}</td>
+      <td>${esc(r.fullName)}</td>
+      <td>${esc(r.age)}</td>
+      <td>${esc(r.whatsapp)}</td>
+      <td>${esc(r.city)}</td>
+      <td>${esc(r.email)}</td>
+      <td>${esc(r.occupation || r.description)}</td>
+      <td><span class="badge">${esc(r.team)}</span></td>
+      <td>${esc(r.mentor)}</td>
+      <td><button class="btn small" onclick="openEdit(${i})">Edit</button></td>
+    </tr>
+  `).join('');
+}
+
+function openEdit(index) {
+  const r = registrations[index];
+  if (!r) return;
+
+  document.getElementById('editRow').value = r.rowNumber || r.row;
+  document.getElementById('editName').value = r.fullName || '';
+  document.getElementById('editAge').value = r.age || '';
+  document.getElementById('editPhone').value = r.whatsapp || '';
+  document.getElementById('editCity').value = r.city || '';
+  document.getElementById('editEmail').value = r.email || '';
+  document.getElementById('editOccupation').value = r.occupation || r.description || 'Student';
+  document.getElementById('editTeam').value = r.team || '';
+  document.getElementById('editMentor').value = r.mentor || '';
+
+  if (currentUser.role !== 'SUPERADMIN') {
+    document.getElementById('editTeam').disabled = true;
+  } else {
+    document.getElementById('editTeam').disabled = false;
+  }
+
+  hideMessage('editMessage');
+  document.getElementById('editModal').classList.remove('hidden');
+}
+
+function closeEdit() {
+  document.getElementById('editModal').classList.add('hidden');
+}
+
+async function saveEdit() {
+  hideMessage('editMessage');
+
+  const data = {
+    fullName:document.getElementById('editName').value.trim(),
+    age:document.getElementById('editAge').value,
+    whatsapp:document.getElementById('editPhone').value.trim(),
+    city:document.getElementById('editCity').value.trim(),
+    email:document.getElementById('editEmail').value.trim(),
+    occupation:document.getElementById('editOccupation').value,
+    team:document.getElementById('editTeam').value,
+    mentor:document.getElementById('editMentor').value.trim()
+  };
+
+  try {
+    const r = await api('updateRegistration',[
+      token,
+      document.getElementById('dateSelect').value,
+      Number(document.getElementById('editRow').value),
+      data
+    ]);
+
+    if (!r.success) throw new Error(r.message || 'Update failed.');
+
+    showMessage('editMessage','Registration updated successfully.','success');
+    await loadData();
+    setTimeout(closeEdit,700);
+
+  } catch (e) {
+    showMessage('editMessage',e.message);
+  }
+}
 
 function exportCSV() {
   if (!registrations.length) {
-    alert("No registrations available.");
+    alert('No registrations to export.');
     return;
   }
 
   const headers = [
-    "Name", "Age", "WhatsApp", "City",
-    "Email", "Currently Doing", "Team", "Mentor"
+    'Timestamp','Full Name','Age','WhatsApp','City',
+    'Email','Status','Team','Mentor'
   ];
 
-  const rows = registrations.map(function(record) {
-    return [
-      getValue(record, ["fullName", "name"]),
-      getValue(record, ["age"]),
-      getValue(record, ["whatsapp", "phone", "whatsappNumber"]),
-      getValue(record, ["city"]),
-      getValue(record, ["email", "emailAddress"]),
-      getValue(record, ["description", "currentlyDoing"]),
-      getValue(record, ["team", "teamName"]),
-      getValue(record, ["mentor", "mentorName"])
-    ];
-  });
+   const rows = registrations.map(r => [
+    r.timestamp,r.fullName,r.age,r.whatsapp,r.city,
+    r.email,r.occupation || r.description,r.team,r.mentor
+  ]);
 
-  function escapeCSV(value) {
-    return '"' + String(value ?? "").replace(/"/g, '""') + '"';
-  }
+  const csv = [headers,...rows].map(row =>
+    row.map(v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"').join(',')
+  ).join('\r\n');
 
-  const csv = [
-    headers.map(escapeCSV).join(","),
-    ...rows.map(row => row.map(escapeCSV).join(","))
-  ].join("\r\n");
-
-  const blob = new Blob(["\uFEFF" + csv], {
-    type: "text/csv;charset=utf-8;"
-  });
-
+  const blob = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
   const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "registrations-" + (selectedDate || "all") + ".csv";
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'registrations-' + (document.getElementById('dateSelect').value || 'all') + '.csv';
+  a.click();
   URL.revokeObjectURL(url);
 }
 
-/* ---------- ADMIN MANAGEMENT ---------- */
+async function createUser() {
+  hideMessage('createMessage');
 
-async function loadAdminUsers() {
-  try {
-    const result = await apiRequest("getAdminUsers", [authToken]);
+  const username = document.getElementById('newUsername').value.trim();
+  const password = document.getElementById('newPassword').value;
+  const role = document.getElementById('newRole').value;
+  const team = document.getElementById('newTeam').value;
 
-    if (result.success === false) {
-      throw new Error(result.message || "Could not load admins.");
-    }
-
-    const data = result.data || result;
-    const users = getValue(data, ["users", "admins", "adminUsers"], []);
-    const body = $("adminUsersBody");
-
-    body.innerHTML = "";
-
-    if (!Array.isArray(users) || !users.length) {
-      body.innerHTML =
-        '<tr><td colspan="4">No admin users found.</td></tr>';
-      return;
-    }
-
-    users.forEach(function(user) {
-      const username = getValue(user, ["username"]);
-      const role = getValue(user, ["role"], "manager");
-      const status = getValue(user, ["active", "isActive", "status"], true);
-
-      const active = status === true ||
-        status === "true" ||
-        status === "Active" ||
-        status === "active";
-
-      const tr = document.createElement("tr");
-
-      [username, role, active ? "Active" : "Inactive"].forEach(function(value) {
-        const td = document.createElement("td");
-        td.textContent = value;
-        td.style.padding = "12px";
-        tr.appendChild(td);
-      });
-
-      const actions = document.createElement("td");
-      actions.style.padding = "12px";
-
-      const statusBtn = document.createElement("button");
-      statusBtn.className = "secondary-btn";
-      statusBtn.textContent = active ? "Deactivate" : "Activate";
-      statusBtn.addEventListener("click", function() {
-        changeAdminStatus(username, !active);
-      });
-
-      const resetBtn = document.createElement("button");
-      resetBtn.className = "secondary-btn";
-      resetBtn.textContent = "Reset Password";
-      resetBtn.style.margin = "4px";
-      resetBtn.addEventListener("click", function() {
-        openPasswordModal(username);
-      });
-
-      const deleteBtn = document.createElement("button");
-      deleteBtn.className = "danger-btn";
-      deleteBtn.textContent = "Delete";
-      deleteBtn.addEventListener("click", function() {
-        deleteAdminUser(username);
-      });
-
-      actions.append(statusBtn, resetBtn, deleteBtn);
-      tr.appendChild(actions);
-      body.appendChild(tr);
-    });
-
-  } catch (error) {
-    showMessage("adminMessage", error.message);
-  }
-}
-
-async function createAdminUser(event) {
-  event.preventDefault();
-
-  const username = $("newUsername").value.trim();
-  const password = $("newPassword").value;
-  const role = $("newRole").value;
-
-  try {
-    const result = await apiRequest(
-      "createAdmin",
-      [authToken, username, password, role]
-    );
-
-    if (result.success === false) {
-      throw new Error(result.message || "Could not create admin.");
-    }
-
-    showMessage("adminMessage", "Admin created successfully.", "success");
-    $("createAdminForm").reset();
-    await loadAdminUsers();
-
-  } catch (error) {
-    showMessage("adminMessage", error.message);
-  }
-}
-
-async function changeAdminStatus(username, active) {
-  if (!confirm("Change status for " + username + "?")) return;
-
-  try {
-    const result = await apiRequest(
-      "setAdminStatus",
-      [authToken, username, active]
-    );
-
-    if (result.success === false) {
-      throw new Error(result.message || "Status update failed.");
-    }
-
-    await loadAdminUsers();
-    showMessage("adminMessage", "Status updated.", "success");
-
-  } catch (error) {
-    showMessage("adminMessage", error.message);
-  }
-}
-
-async function deleteAdminUser(username) {
-  if (!confirm("Delete admin " + username + "?")) return;
-
-  try {
-    const result = await apiRequest(
-      "deleteAdmin",
-      [authToken, username]
-    );
-
-    if (result.success === false) {
-      throw new Error(result.message || "Delete failed.");
-    }
-
-    await loadAdminUsers();
-    showMessage("adminMessage", "Admin deleted.", "success");
-
-  } catch (error) {
-    showMessage("adminMessage", error.message);
-  }
-}
-
-/* ---------- PASSWORD RESET ---------- */
-
-function openPasswordModal(username) {
-  $("passwordUsername").textContent = username;
-  $("resetPasswordInput").value = "";
-
-  showMessage("passwordMessage", "");
-
-  $("passwordModal").classList.remove("hidden");
-  $("passwordModal").style.display = "flex";
-}
-
-function closePasswordModal() {
-  $("passwordModal").classList.add("hidden");
-  $("passwordModal").style.display = "none";
-}
-
-async function resetAdminPassword() {
-  const username = $("passwordUsername").textContent;
-  const password = $("resetPasswordInput").value;
-  const button = $("resetPasswordBtn");
-
-  if (password.length < 6) {
-    showMessage(
-      "passwordMessage",
-      "Password must be at least 6 characters."
-    );
+  if (!username || !password || !team) {
+    showMessage('createMessage','Please fill all account fields.');
     return;
   }
 
-  button.disabled = true;
-  button.textContent = "PLEASE WAIT...";
+  try {
+    const r = await api('createAdmin',[token,username,password,role,team]);
+    if (!r.success) throw new Error(r.message || 'Could not create account.');
+
+    showMessage('createMessage',r.message || 'Account created.','success');
+    document.getElementById('newUsername').value = '';
+    document.getElementById('newPassword').value = '';
+    await loadUsers();
+
+  } catch (e) {
+    showMessage('createMessage',e.message);
+  }
+}
+
+async function loadUsers() {
+  if (currentUser.role !== 'SUPERADMIN') return;
+
+  const body = document.getElementById('userRows');
+  body.innerHTML = '<tr><td colspan="5" class="empty">Loading...</td></tr>';
 
   try {
-    const result = await apiRequest(
-      "resetAdminPassword",
-      [authToken, username, password]
-    );
+    const r = await api('getAdminUsers',[token]);
+    if (!r.success) throw new Error(r.message || 'Could not load accounts.');
 
-    if (result.success === false) {
-      throw new Error(result.message || "Password reset failed.");
+    users = r.users || [];
+
+    if (!users.length) {
+      body.innerHTML = '<tr><td colspan="5" class="empty">No accounts found.</td></tr>';
+      return;
     }
 
-    showMessage(
-      "passwordMessage",
-      "Password updated successfully.",
-      "success"
-    );
+    body.innerHTML = users.map((u,i) => `
+      <tr>
+        <td>${esc(u.username)}</td>
+        <td>${esc(u.role)}</td>
+        <td>${esc(u.team)}</td>
+        <td>${u.active ? '<span style="color:#65d58b">Active</span>' : '<span style="color:#e77">Disabled</span>'}</td>
+        <td>
+          <div class="actions">
+            <button class="btn small secondary" onclick="toggleUser(${i})">${u.active?'Disable':'Enable'}</button>
+            <button class="btn small secondary" onclick="resetPassword(${i})">Reset Password</button>
+            <button class="btn small danger" onclick="removeUser(${i})">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
 
-    $("resetPasswordInput").value = "";
-
-  } catch (error) {
-    showMessage("passwordMessage", error.message);
-
-  } finally {
-    button.disabled = false;
-    button.textContent = "Reset Password";
+  } catch (e) {
+    body.innerHTML = `<tr><td colspan="5" class="empty">${esc(e.message)}</td></tr>`;
   }
 }
 
-/* ---------- LOGOUT ---------- */
-
-async function logout() {
-  if (!confirm("Are you sure you want to logout?")) return;
+async function toggleUser(index) {
+  const u = users[index];
+  if (!u || !confirm((u.active?'Disable':'Enable')+' account '+u.username+'?')) return;
 
   try {
-    await apiRequest("adminLogout", [authToken]);
-  } catch (error) {
-    console.error(error);
+    const r = await api('setAdminStatus',[token,u.username,!u.active]);
+    if (!r.success) throw new Error(r.message);
+    await loadUsers();
+  } catch (e) {
+    alert(e.message);
   }
-
-  authToken = "";
-  currentAdmin = null;
-  registrations = [];
-  selectedDate = "";
-
-  $("dashboardSection").classList.add("hidden");
-  $("loginSection").classList.remove("hidden");
-  $("loginPassword").value = "";
 }
 
-/* ---------- EVENT LISTENERS ---------- */
+async function resetPassword(index) {
+  const u = users[index];
+  if (!u) return;
 
-document.addEventListener("DOMContentLoaded", function() {
+  const password = prompt('Enter new password for '+u.username+' (minimum 8 characters):');
+  if (password === null) return;
 
-  // Keep admin management hidden before login.
-  $("adminManagement").style.display = "none";
+  try {
+    const r = await api('resetAdminPassword',[token,u.username,password]);
+    if (!r.success) throw new Error(r.message);
+    alert(r.message || 'Password reset successfully.');
+  } catch (e) {
+    alert(e.message);
+  }
+}
 
-  $("editModal").style.display = "none";
-  $("passwordModal").style.display = "none";
+async function removeUser(index) {
+  const u = users[index];
+  if (!u || !confirm('Permanently delete account '+u.username+'?')) return;
 
-  $("loginForm").addEventListener("submit", handleLogin);
+  try {
+    const r = await api('deleteAdmin',[token,u.username]);
+    if (!r.success) throw new Error(r.message);
+    await loadUsers();
+  } catch (e) {
+    alert(e.message);
+  }
+}
 
-  $("searchInput").addEventListener("input", renderRegistrations);
+document.getElementById('loginPassword').addEventListener('keydown',e=>{
+  if(e.key==='Enter') login();
+});
 
-  $("dateSelect").addEventListener("change", async function() {
-    selectedDate = this.value;
-    await loadDashboard();
-  });
-
-  $("refreshBtn").addEventListener("click", loadDashboard);
-
-  $("exportBtn").addEventListener("click", exportCSV);
-
-  $("editForm").addEventListener("submit", saveEdit);
-
-  $("closeEditBtn").addEventListener("click", closeEditModal);
-
-  $("createAdminForm").addEventListener("submit", createAdminUser);
-
-  $("resetPasswordBtn").addEventListener("click", resetAdminPassword);
-
-  $("closePasswordBtn").addEventListener("click", closePasswordModal);
-
-  $("logoutBtn").addEventListener("click", logout);
-
+document.getElementById('loginUsername').addEventListener('keydown',e=>{
+  if(e.key==='Enter') login();
 });
 </script>
-
-</div>
-
 </body>
 </html>
